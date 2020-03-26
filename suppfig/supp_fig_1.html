@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0121)file:///C:/Users/genna/OneDrive%20-%20California%20Institute%20of%20Technology/work/specfun/codes/suppfig/supp_fig_1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>supp_fig_1</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-03-25"><meta name="DC.source" content="supp_fig_1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> supp_fig_1
+clc;clear;close <span class="string">all</span>;
+
+<span class="comment">%%%%%%</span>
+<span class="comment">% Initialize the complex plane points to sample</span>
+<span class="comment">%width of the square in the complex plane, centered on zero</span>
+D = 70;
+<span class="comment">%number of points per side of grid</span>
+nnn = 1000;
+R = linspace(-D/2,D/2,nnn);
+[R_,I_] = ndgrid(R,R);
+z = R_(:) + I_(:)*1i;
+
+purp = [239,171,245]/255;
+
+
+<span class="comment">%calculate the MATLAB built-in benchmark results</span>
+tic;
+tru = expint(z);
+t_matlab = toc;
+
+<span class="comment">%define functions to evaluate</span>
+func = {  <span class="keyword">...</span>
+    @(z)e1_pade_n_b(z,6),<span class="keyword">...</span>
+    @(z)e1_pade_n_c(z,10),<span class="keyword">...</span>
+    @(z)e1_pade_n(z,10),<span class="keyword">...</span>
+    @(z)-ei_cheb_lt8(-z,20)-sign(angle(z))*1i*pi,<span class="keyword">...</span>
+    @(z)-ei_cheb_gt8(-z,20)-sign(angle(z))*1i*pi,<span class="keyword">...</span>
+    @(z)e1_series_2(z,55),<span class="keyword">...</span>
+    @(z)me1z_gg200131_comb_4(z)};
+n=8;
+
+p1=[227,172,82]/255;
+p2=[252,222,164]/255;
+p3=[90,180,172]/255;
+map = NaN(n*2,3);
+<span class="keyword">for</span> i = 1:3
+    map(1:n,i) = linspace(p1(i),p2(i),n);
+    map((n+1):end,i) = linspace(p2(i),p3(i),n);
+<span class="keyword">end</span>
+
+name = {<span class="string">'pade1'</span>,<span class="string">'pade2'</span>,<span class="string">'pade3'</span>,<span class="string">'cheb1'</span>,<span class="string">'cheb2'</span>,<span class="string">'taylor'</span>,<span class="string">'Combined'</span>};
+
+
+<span class="comment">%define axes and elliptical regions to draw</span>
+axBIG = subplot(2,5,[4,5,9,10]);hold <span class="string">on</span>;
+cent = [-6.5,-10,-.65,-4.5];
+rad_1 = [17,15,4.05,4.5];
+rad_2 = [13,9.5,4,2.3];
+
+<span class="comment">%begin to evaluate approximations</span>
+<span class="keyword">for</span> i = 7:-1:1
+
+    tic
+    est=func{i}(z);
+    t_ = toc;
+
+    <span class="keyword">if</span> i&gt;3,JJ=i+2;<span class="keyword">else</span> JJ=i;<span class="keyword">end</span>
+    <span class="keyword">if</span> i&lt;7
+        ax = subplot(2,5,JJ);
+        axes(ax)
+    <span class="keyword">else</span>
+        axes(axBIG);
+    <span class="keyword">end</span>
+
+    <span class="comment">%calculate error value, clamping at 1e-18</span>
+    val = log10(abs(est-tru)./abs(tru));
+    val(val&lt;-18)=-18;
+    colormap(map);
+
+    <span class="comment">%draw behavior of approximation error throughout the complex plane</span>
+    [~,HH]=contourf(R_,I_,reshape(val,size(R_)),30); hold <span class="string">on</span>;
+    set(HH,<span class="string">'LineColor'</span>,<span class="string">'none'</span>)
+
+    <span class="comment">%center colormap at 1e-8</span>
+    caxis([-18,2]);
+    axis(D/2*[-1 1 -1 1]);
+    title(name{i},<span class="string">'FontWeight'</span>,<span class="string">'Normal'</span>);
+
+    <span class="comment">%print error and timing diagonstics</span>
+    fprintf(<span class="string">'%i: %s maxerr: %.3f, Tref/T = %.3f.\n'</span>,i,name{i},<span class="keyword">...</span>
+        max(log10(abs(est-tru)./abs(tru))),t_matlab/t_);
+    set(gca,<span class="string">'xcolor'</span>,<span class="string">'none'</span>,<span class="string">'ycolor'</span>,<span class="string">'none'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'color'</span>,<span class="string">'none'</span>)
+
+    <span class="comment">%plot the approximation bounds</span>
+    <span class="keyword">if</span> i &lt; 5
+        th_ = linspace(0,2*pi,100);
+        x_ = rad_1(i)*cos(th_)+cent(i);
+        y_ = rad_2(i)*sin(th_);
+        axes(ax)
+        plot(x_,y_,<span class="string">'-'</span>,<span class="string">'Color'</span>,purp,<span class="string">'LineWidth'</span>,2);
+        axes(axBIG)
+        plot(x_,y_,<span class="string">'-'</span>,<span class="string">'Color'</span>,purp,<span class="string">'LineWidth'</span>,2);hold <span class="string">on</span>;
+    <span class="keyword">elseif</span> i==5
+        xl=xlim;
+        x_ = linspace(xl(1),-8,50); x_ = [x_ fliplr(x_)];
+        y_ = linspace(0.5294*(-8-xl(1)),0,50); y_ = [y_ -fliplr(y_)];
+        axes(ax)
+        plot(x_,y_,<span class="string">'-'</span>,<span class="string">'Color'</span>,purp,<span class="string">'LineWidth'</span>,2);
+        axes(axBIG)
+        plot(x_,y_,<span class="string">'-'</span>,<span class="string">'Color'</span>,purp,<span class="string">'LineWidth'</span>,2);hold <span class="string">on</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+set(gcf,<span class="string">'Units'</span>,<span class="string">'Normalized'</span>,<span class="string">'Position'</span>,[0.2188 0.3630 0.4885 0.3083])
+<span class="keyword">return</span>
+</pre><pre class="codeoutput">7: Combined maxerr: -7.953, Tref/T = 20.898.
+6: taylor maxerr: 34.897, Tref/T = 5.775.
+5: cheb2 maxerr: 46.743, Tref/T = 10.657.
+4: cheb1 maxerr: 33.213, Tref/T = 10.408.
+3: pade3 maxerr: 15.168, Tref/T = 33.697.
+2: pade2 maxerr: 0.798, Tref/T = 38.908.
+1: pade1 maxerr: 0.915, Tref/T = 41.631.
+</pre><img vspace="5" hspace="5" src="./supp_fig_1_files/supp_fig_1_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB® R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function supp_fig_1
+clc;clear;close all;
+
+%%%%%%
+% Initialize the complex plane points to sample
+%width of the square in the complex plane, centered on zero
+D = 70;
+%number of points per side of grid
+nnn = 1000;
+R = linspace(-D/2,D/2,nnn);
+[R_,I_] = ndgrid(R,R); 
+z = R_(:) + I_(:)*1i;
+
+purp = [239,171,245]/255;
+
+
+%calculate the MATLAB built-in benchmark results
+tic;
+tru = expint(z);
+t_matlab = toc;
+
+%define functions to evaluate
+func = {  ...
+    @(z)e1_pade_n_b(z,6),...
+    @(z)e1_pade_n_c(z,10),...
+    @(z)e1_pade_n(z,10),...
+    @(z)-ei_cheb_lt8(-z,20)-sign(angle(z))*1i*pi,...
+    @(z)-ei_cheb_gt8(-z,20)-sign(angle(z))*1i*pi,...
+    @(z)e1_series_2(z,55),...
+    @(z)me1z_gg200131_comb_4(z)};
+n=8;
+
+p1=[227,172,82]/255;
+p2=[252,222,164]/255;
+p3=[90,180,172]/255;
+map = NaN(n*2,3);
+for i = 1:3
+    map(1:n,i) = linspace(p1(i),p2(i),n);
+    map((n+1):end,i) = linspace(p2(i),p3(i),n);
+end
+
+name = {'pade1','pade2','pade3','cheb1','cheb2','taylor','Combined'};
+
+
+%define axes and elliptical regions to draw
+axBIG = subplot(2,5,[4,5,9,10]);hold on;
+cent = [-6.5,-10,-.65,-4.5];
+rad_1 = [17,15,4.05,4.5];
+rad_2 = [13,9.5,4,2.3];
+
+%begin to evaluate approximations
+for i = 7:-1:1
+    
+    tic
+    est=func{i}(z);
+    t_ = toc;
+    
+    if i>3,JJ=i+2;else JJ=i;end
+    if i<7
+        ax = subplot(2,5,JJ);
+        axes(ax)
+    else
+        axes(axBIG);
+    end
+    
+    %calculate error value, clamping at 1e-18
+    val = log10(abs(est-tru)./abs(tru)); 
+    val(val<-18)=-18;
+    colormap(map);
+    
+    %draw behavior of approximation error throughout the complex plane
+    [~,HH]=contourf(R_,I_,reshape(val,size(R_)),30); hold on; 
+    set(HH,'LineColor','none')
+
+    %center colormap at 1e-8
+    caxis([-18,2]);
+    axis(D/2*[-1 1 -1 1]);
+    title(name{i},'FontWeight','Normal');
+    
+    %print error and timing diagonstics
+    fprintf('%i: %s maxerr: %.3f, Tref/T = %.3f.\n',i,name{i},...
+        max(log10(abs(est-tru)./abs(tru))),t_matlab/t_);
+    set(gca,'xcolor','none','ycolor','none','FontSize',12,'color','none')
+
+    %plot the approximation bounds
+    if i < 5
+        th_ = linspace(0,2*pi,100);
+        x_ = rad_1(i)*cos(th_)+cent(i);
+        y_ = rad_2(i)*sin(th_);
+        axes(ax)
+        plot(x_,y_,'-','Color',purp,'LineWidth',2);
+        axes(axBIG)
+        plot(x_,y_,'-','Color',purp,'LineWidth',2);hold on;
+    elseif i==5
+        xl=xlim;
+        x_ = linspace(xl(1),-8,50); x_ = [x_ fliplr(x_)];
+        y_ = linspace(0.5294*(-8-xl(1)),0,50); y_ = [y_ -fliplr(y_)];
+        axes(ax)
+        plot(x_,y_,'-','Color',purp,'LineWidth',2);
+        axes(axBIG)
+        plot(x_,y_,'-','Color',purp,'LineWidth',2);hold on;
+    end
+end
+
+set(gcf,'Units','Normalized','Position',[0.2188 0.3630 0.4885 0.3083])
+return
+##### SOURCE END #####
+--></body></html>
