@@ -129,6 +129,9 @@ for i = 1:(nT-1)
     subplot(1,dim,i)
     plot(0:(N-1),Pa_marg,'r--','LineWidth',2);
     ylim([min(ylim)/5,max(ylim)]);
+    if i==1
+        legend('Gillespie','Numerical','Analytical','Location','NorthEast');
+    end
 
     
     %compute nascent marginal
