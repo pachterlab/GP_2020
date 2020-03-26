@@ -2,7 +2,7 @@
 
 The directory `fig2a` contains codes to reproduce Figure 2a, which demonstrates the effect of approximation order on a sample probability mass function. The following files are provided: 
 
-`fig2a.m`: MATLAB code to compute distributions. The computation uses a simulation (gray histogram)  and special-function approximations over a user-defined grid (red line). 
+`fig_2a.m`: MATLAB code to compute distributions. The computation uses a simulation (gray histogram)  and special-function approximations over a user-defined grid (red line). 
 
 `fig_2a.pdf`: Published MATLAB output of the visualization code.
 
