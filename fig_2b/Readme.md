@@ -20,4 +20,4 @@ The directory `fig_2b` contains codes to reproduce Figure 2b-d, which demonstrat
 `benchmark_visualizer.pdf`: Published MATLAB output of the runtime and error visualization code.
 
 
-All others: As described in `fig_2a` directory. The implementation of `gg_200325_analyt_geom_tdep_vec_31.m` is identical to the implementation of `gg_200130_analyt_geom_tdep_vec_26.m`, save for the meaning of the argument `marg`, which is Boolean in the latter and a string in the former. 
+All others: As described in `fig_2a` directory. The implementation of `gg_200325_analyt_geom_tdep_vec_31.m` is identical to the implementation of `gg_200130_analyt_geom_tdep_vec_26.m`, save for the meaning of the argument `marg`, which is Boolean in the latter and may be a string in the former. 
