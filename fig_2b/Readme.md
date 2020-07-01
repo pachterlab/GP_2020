@@ -1,5 +1,5 @@
-# fig_2b
-The directory `fig_2b` contains codes to reproduce Figure 2b-d, which demonstrates the concordance between numerical and analytical integral solutions for a parameter estimation problem, as well as compares the performance of the two approaches. The following files are provided: 
+# fig_2bcd
+The directory `fig_2bcd` contains codes to reproduce Figure 2b-d, which demonstrates the concordance between numerical and analytical integral solutions for a parameter estimation problem, as well as compares the performance of the two approaches. The following files are provided: 
 
 `gillesie_data_generator.m`: MATLAB code to generate synthetic target joint distribution data by running the stochastic simulation algorithm (SSA) implementation in `gg_200110_gillespie_geom_1.m`.
 
