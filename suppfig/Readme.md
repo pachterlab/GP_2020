@@ -1,0 +1,3 @@
+The directory `supp_fig_1` contains the code necessary to reproduce the first Supplementary Figure, specifically the custom exponential integral evaluation routine and the supporting code for plotting and timing.
+
+The directory `supp_fig_2345` contains the code necessary to reproduce Supplementary Figure 2-7, focusing on the validation of the approximation procedure using a 2-dimensional inference problem and a 7/1 approximation schema. The associated simulated data are contained in the `data` subdirectory, whereas the inference and validation results are contained in the `landscape` subdirectory.
