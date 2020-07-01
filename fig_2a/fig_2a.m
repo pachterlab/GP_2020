@@ -1,6 +1,12 @@
 function fig_2a
 clear;clc;close all;
 
+%a e s t h e t i c s
+line_width = 0.8;
+line_color = 'r';
+face_color = 0.4*[1 1 1];
+edge_color = 'none';
+
 %initialize physiology
 beta = 1.1;
 gamma = beta;
@@ -27,7 +33,7 @@ Lmax = 4;
 
 
 f=figure;
-set(f,'Position',[636 590 604 230]);
+set(f,'Position',[636 200 604 230]);
 
 for NN = 1:(Tmax*Lmax)
     N_approx_taylor = mod(NN-1,Tmax)+1;
@@ -39,7 +45,7 @@ for NN = 1:(Tmax*Lmax)
     figure(1)
     subplot(Lmax,Tmax,NN)
     histogram(X(:,end,2),'BinMethod','integers','Normalization','pdf',...
-        'FaceColor',0.5*[1 1 1],'EdgeColor','none'); hold on;
+        'FaceColor',face_color,'EdgeColor',edge_color); hold on;
     set(gca,'xtick',[],'ytick',[],'box','off');
 
     M = max(X(:,end,1))+1;
@@ -50,7 +56,7 @@ for NN = 1:(Tmax*Lmax)
         'mature',N_approx_taylor,N_approx_laurent);
     
     %plot approximation results
-    plot(0:(N-1),Pa_marg,'r-','LineWidth',1.5);
+    plot(0:(N-1),Pa_marg,strcat(line_color,'-'),'LineWidth',line_width);
     
     %if desired, output approximation order as title of each plot
 %     title(sprintf('T=%i, L=%i',N_approx_taylor,N_approx_laurent),...
